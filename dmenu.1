@@ -3,7 +3,7 @@
 dmenu \- dynamic menu
 .SH SYNOPSIS
 .B dmenu
-.RB [ \-bfiv ]
+.RB [ \-bcfivP ]
 .RB [ \-l
 .IR lines ]
 .RB [ \-m
@@ -24,6 +24,8 @@ dmenu \- dynamic menu
 .IR color ]
 .RB [ \-of
 .IR color ]
+.RB [ \-bw
+.IR width ]
 .RB [ \-w
 .IR windowid ]
 .P
@@ -44,12 +46,18 @@ which lists programs in the user's $PATH and runs the result in their $SHELL.
 .B \-b
 dmenu appears at the bottom of the screen.
 .TP
+.B \-c
+dmenu appears centered on the screen.
+.TP
 .B \-f
 dmenu grabs the keyboard before reading stdin if not reading from a tty. This
 is faster, but will lock up X until stdin reaches end\-of\-file.
 .TP
 .B \-i
 dmenu matches menu items case insensitively.
+.TP
+.B \-P
+dmenu will not directly display the keyboard input, but instead replace it with dots. All data from stdin will be ignored.
 .TP
 .BI \-l " lines"
 dmenu lists items vertically, with the given number of lines.
@@ -84,6 +92,9 @@ defines the outline background color (for multiple selection).
 .TP
 .BI \-of " color"
 defines the outline foreground color (for multiple selection).
+.TP
+.BI \-bw " width"
+defines the window border width in pixels.
 .TP
 .B \-v
 prints version information to stdout, then exits.
