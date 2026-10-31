@@ -25,7 +25,7 @@
 #define TEXTW(X)              (drw_fontset_getwidth(drw, (X)) + lrpad)
 
 /* enums */
-enum { SchemeNorm, SchemeSel, SchemeOut, SchemeLast }; /* color schemes */
+enum { SchemeNorm, SchemeSel, SchemeOut, SchemePrompt, SchemeBorder, SchemeLast }; /* color schemes */
 
 struct item {
 	char *text;
@@ -164,12 +164,13 @@ drawmenu(void)
 	drw_rect(drw, 0, 0, mw, mh, 1, 1);
 
 	if (prompt && *prompt) {
-		drw_setscheme(drw, scheme[SchemeSel]);
+		drw_setscheme(drw, scheme[SchemePrompt]);
 		x = drw_text(drw, x, 0, promptw, bh, lrpad / 2, prompt, 0);
 	}
-	/* draw input field */
+	/* draw input field（与选中项 SchemeSel 区分） */
 	w = (lines > 0 || !matches) ? mw - x : inputw;
-	drw_setscheme(drw, scheme[SchemeNorm]);
+	drw_setscheme(drw, scheme[SchemePrompt]);
+	drw_rect(drw, x, 0, w, bh, 1, 1);
 	if (passwd) {
 		censort = ecalloc(1, sizeof(text));
 		memset(censort, '.', strlen(text));
@@ -181,7 +182,7 @@ drawmenu(void)
 
 	curpos = TEXTW(text) - TEXTW(&text[cursor]);
 	if ((curpos += lrpad / 2 - 1) < w) {
-		drw_setscheme(drw, scheme[SchemeNorm]);
+		drw_setscheme(drw, scheme[SchemePrompt]);
 		drw_rect(drw, x + curpos, 2, 2, bh - 4, 1, 0);
 	}
 
@@ -724,7 +725,7 @@ setup(void)
 	                    CopyFromParent, CopyFromParent, CopyFromParent,
 	                    CWOverrideRedirect | CWBackPixel | CWEventMask, &swa);
 	if (border_width)
-		XSetWindowBorder(dpy, win, scheme[SchemeSel][ColBg].pixel);
+		XSetWindowBorder(dpy, win, scheme[SchemeBorder][ColBg].pixel);
 	XSetClassHint(dpy, win, &ch);
 
 	/* input methods */

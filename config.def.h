@@ -10,12 +10,15 @@ static const char *fonts[] = {
 	"monospace:size=10"
 };
 static const char *prompt      = NULL;      /* -p  option; prompt to the left of input field */
-/* Gruvbox Dark — 与 dwm / st / neovim 对齐 */
+/* Gruvbox Dark — 与 dwm / st / neovim 对齐
+ * Norm：列表；Prompt：输入行；Sel：选中（黄）；Border：与 dwm col_border 同色 */
 static const char *colors[SchemeLast][2] = {
 	/*     fg         bg       */
-	[SchemeNorm] = { "#a89984", "#282828" },
-	[SchemeSel]  = { "#ebdbb2", "#458588" },
-	[SchemeOut]  = { "#282828", "#8ec07c" },
+	[SchemeNorm]   = { "#a89984", "#282828" },
+	[SchemeSel]    = { "#282828", "#d79921" },
+	[SchemeOut]    = { "#282828", "#8ec07c" },
+	[SchemePrompt] = { "#ebdbb2", "#3c3836" },
+	[SchemeBorder] = { "#458588", "#458588" },
 };
 /* -l option; if nonzero, dmenu uses vertical list with given number of lines */
 static unsigned int lines      = 0;
