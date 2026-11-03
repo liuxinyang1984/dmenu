@@ -4,6 +4,7 @@ dmenu \- dynamic menu
 .SH SYNOPSIS
 .B dmenu
 .RB [ \-bcfivP ]
+.RB [ \-wm ]
 .RB [ \-l
 .IR lines ]
 .RB [ \-m
@@ -101,6 +102,12 @@ prints version information to stdout, then exits.
 .TP
 .BI \-w " windowid"
 embed into windowid.
+.TP
+.B \-wm
+display as a managed WM window (do not set override_redirect). Use with a
+floating rule in the WM; typically pair with
+.B \-bw 0
+so the WM draws the outer frame.
 .SH USAGE
 dmenu is completely controlled by the keyboard.  Items are selected using the
 arrow keys, page up, page down, home, and end.
